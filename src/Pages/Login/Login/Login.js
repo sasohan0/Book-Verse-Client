@@ -15,6 +15,8 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import Loading from "../../Shared/Loading/Loading";
+import Error from "../../Shared/Error/Error";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -34,17 +36,10 @@ const Login = () => {
     await signInWithEmailAndPassword(email, password);
   };
 
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-      </div>
-    );
+  if (loading || loadingGoogle) {
+    return <Loading></Loading>;
   }
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (user) {
+  if (user || userGoogle) {
     navigate(from, { replace: true });
   }
 
@@ -63,6 +58,12 @@ const Login = () => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <div>
+            {error && <Error key={Math.random()} error={error}></Error>}
+            {errorGoogle && (
+              <Error key={Math.random()} error={errorGoogle}></Error>
+            )}
+          </div>
           <span>
             Don't have an account? <Link to="/register"> register here</Link>
           </span>
