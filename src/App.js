@@ -5,6 +5,7 @@ import Home from "./Pages/Home/Home/Home";
 import Header from "./Pages/Header/Header";
 import Register from "./Pages/Login/Register/Register";
 import Login from "./Pages/Login/Login/Login";
+import RequireAuth from "./Pages/RequireAuth/RequireAuth";
 function App() {
   return (
     <div>

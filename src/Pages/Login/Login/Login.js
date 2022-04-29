@@ -94,14 +94,18 @@ const Login = () => {
         </div>
         <br />
         <div style={{ textAlign: "center" }}>
-          <Button
+          <button
             onClick={() => signInWithGoogle()}
-            className="w-50"
-            variant="light"
-            type="submit"
+            className="w-50 btn btn-light border-secondary rounded-pill"
           >
+            <img
+              style={{ width: "40px", height: "40px" }}
+              className="me-2 "
+              src="google.ico"
+              alt=""
+            />
             Continue with google
-          </Button>
+          </button>
         </div>
       </Form>
     </div>

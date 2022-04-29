@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/esm/Button";
 import {
   useCreateUserWithEmailAndPassword,
+  useSendEmailVerification,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
@@ -13,33 +14,68 @@ const Register = () => {
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
+  const [sendEmailVerification, sending, errorV] =
+    useSendEmailVerification(auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     await createUserWithEmailAndPassword(email, password);
+    await sendEmailVerification();
+    alert("Sent email");
   };
+
+  if (
+    user?.user?.providerData[0]?.providerId === "password" &&
+    !user?.emailVerified
+  ) {
+    return (
+      <div className="text-center mt-5">
+        <h3 className="text-danger">Your Email is not verified!!</h3>
+        <h5 className="text-success"> Please Verify your email address</h5>
+        <button
+          className="btn btn-primary"
+          onClick={async () => {
+            await sendEmailVerification();
+            alert("Sent email");
+          }}
+        >
+          Send Verification Email Again
+        </button>
+      </div>
+    );
+  }
 
   if (error || errorGoogle) {
     return (
       <div>
-        <p>Error: {error.message}</p>
+        <p>Error: {error?.message || errorGoogle?.message}</p>
       </div>
     );
   }
+
   if (loading || loadingGoogle) {
     return <p>Loading...</p>;
   }
-  if (user || userGoogle) {
-    return (
-      <div>
-        <p>
-          Registered User: {user.user.email}||{userGoogle?.user?.email}
-        </p>
-      </div>
-    );
+
+  if (user?.user) {
+    console.log(user);
+    if (user || userGoogle) {
+      return (
+        <div>
+          <p>Registered User: {user?.user?.email || userGoogle?.user?.email}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <p>verify your mail</p>
+        </div>
+      );
+    }
   }
+
   return (
     <div className="container   mt-5">
       <Form onSubmit={(e) => handleSubmit(e)} className="w-50 mx-auto">
@@ -86,14 +122,18 @@ const Register = () => {
         </div>
         <br />
         <div style={{ textAlign: "center" }}>
-          <Button
+          <button
             onClick={() => signInWithGoogle()}
-            className="w-50"
-            variant="light"
-            type="submit"
+            className=" btn btn-light  w-50 rounded-pill border-secondary"
           >
-            Submit
-          </Button>
+            <img
+              style={{ width: "40px", height: "40px" }}
+              className="me-2 "
+              src="google.ico"
+              alt=""
+            />
+            Continue with google
+          </button>
         </div>
       </Form>
     </div>

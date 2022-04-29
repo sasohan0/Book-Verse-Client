@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 
 import Container from "react-bootstrap/esm/Container";
 import Nav from "react-bootstrap/esm/Nav";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import { signOut } from "firebase/auth";
 
 const Header = () => {
+  const [user, loading] = useAuthState(auth);
+
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -13,15 +18,40 @@ const Header = () => {
           <Navbar.Brand href="#home">BOOKVERSE</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="ms-auto">
-              <Nav.Link href="#features">Features</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
+            {user ? (
+              <Nav className="ms-auto">
+                <Nav.Link href="#features">Manage Items</Nav.Link>
+                <Nav.Link href="#pricing">Add Item</Nav.Link>
+              </Nav>
+            ) : (
+              <Nav className="ms-auto">
+                <Nav.Link href="#features">Manage Items</Nav.Link>
+                <Nav.Link href="#pricing">Add Item</Nav.Link>
+                <Nav.Link
+                  className="btn btn-warning text-dark px-4"
+                  as={Link}
+                  to="/login"
+                  eventKey={2}
+                >
+                  Login
+                </Nav.Link>
+              </Nav>
+            )}
+
             <Nav>
-              <Nav.Link href="#deets">More deets</Nav.Link>
-              <Nav.Link as={Link} to="/login" eventKey={2} href="#memes">
-                Login
-              </Nav.Link>
+              {user ? (
+                <Nav>
+                  <Nav.Link href="#deets">My Items</Nav.Link>
+                  <button
+                    onClick={() => signOut(auth)}
+                    className="btn btn-danger"
+                  >
+                    Logout
+                  </button>
+                </Nav>
+              ) : (
+                <></>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
