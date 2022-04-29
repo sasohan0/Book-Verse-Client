@@ -5,7 +5,6 @@ import Items from "../Items/Items/Items";
 const Home = () => {
   return (
     <div>
-      <h1>Welcome Home</h1>
       <Banner></Banner>
       <Items></Items>
     </div>
