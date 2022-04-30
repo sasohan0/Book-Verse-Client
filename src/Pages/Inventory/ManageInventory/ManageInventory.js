@@ -8,7 +8,7 @@ const ManageInventory = () => {
     fetch("https://blooming-wave-56097.herokuapp.com/inventory")
       .then((res) => res.json())
       .then((data) => setItems(data));
-  }, []);
+  }, [items]);
   return (
     <div className="container">
       <Table striped bordered hover variant="dark">
