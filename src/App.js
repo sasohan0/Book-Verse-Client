@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home/Home";
@@ -7,7 +6,7 @@ import Register from "./Pages/Login/Register/Register";
 import Login from "./Pages/Login/Login/Login";
 import RequireAuth from "./Pages/RequireAuth/RequireAuth";
 import ItemDetails from "./Pages/Home/Items/ItemDetails/ItemDetails";
-import Inventory from "./Pages/Inventory/Inventory";
+import ManageInventory from "./Pages/Inventory/ManageInventory/ManageInventory";
 
 function App() {
   return (
@@ -25,7 +24,10 @@ function App() {
             </RequireAuth>
           }
         ></Route>
-        <Route path="/inventory" element={<Inventory></Inventory>}></Route>
+        <Route
+          path="/inventory"
+          element={<ManageInventory></ManageInventory>}
+        ></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path="*" element={<Home></Home>}></Route>

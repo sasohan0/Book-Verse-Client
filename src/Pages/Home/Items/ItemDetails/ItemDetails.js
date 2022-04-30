@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import Card from "react-bootstrap/esm/Card";
 import { useParams } from "react-router-dom";
 
@@ -9,33 +9,58 @@ const ItemDetails = () => {
   let { img, _id, name, price, quantity, shortDescription, supplierName } =
     itemDetail;
   useEffect(() => {
-    const url = `http://localhost:5000/inventory/${itemId}`;
+    const url = `https://blooming-wave-56097.herokuapp.com/inventory/${itemId}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setItemDetail(data));
   }, [itemId]);
-  const handleDelivered = async (itemDetail) => {
+  const handleDelivered = async (itemDetail, itemId) => {
     console.log(quantity);
     if (quantity > 0) {
       let { quantity, ...rest } = itemDetail;
-      quantity = (await quantity) - 1;
+      quantity = parseInt(quantity) - 1;
 
+      const newItemDetail = { quantity, ...rest };
+
+      setItemDetail(newItemDetail);
+      const updatedQuantity = { quantity };
+      fetch(`https://blooming-wave-56097.herokuapp.com/inventory/${itemId}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updatedQuantity),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
+  };
+  const handleRestock = async (e, itemDetail, itemId) => {
+    e.preventDefault();
+    const restockAmount = e.target.restockAmount.value;
+    if (restockAmount > 0) {
+      console.log(parseInt(restockAmount));
+      let { quantity, ...rest } = itemDetail;
+      quantity = parseInt(quantity) + parseInt(restockAmount);
+      const updatedQuantity = { quantity };
       const newItemDetail = { quantity, ...rest };
       console.log(newItemDetail);
       setItemDetail(newItemDetail);
+      fetch(`https://blooming-wave-56097.herokuapp.com/inventory/${itemId}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updatedQuantity),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
     }
   };
-
-  useEffect(() => {
-    // fetch("https://blooming-wave-56097.herokuapp.com/inventory");
-    fetch("http://localhost:5000/inventory", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(itemDetail),
-    });
-  }, [itemDetail]);
 
   return (
     <div className="container">
@@ -69,13 +94,36 @@ const ItemDetails = () => {
         </ListGroup>
         <Card.Body>
           <button
-            onClick={() => handleDelivered(itemDetail)}
+            onClick={() => handleDelivered(itemDetail, itemId)}
             className="btn btn-success"
           >
             Delivered
           </button>
         </Card.Body>
       </Card>
+      <div className="mx-auto container" style={{ width: "50%" }}>
+        <span className="d-flex mt-5 justify-content-center display-5 fw-bold ">
+          ADD MORE
+        </span>
+        <Form onSubmit={(e) => handleRestock(e, itemDetail, itemId)}>
+          <Form.Group className="mb-3 mt-5">
+            <Form.Label>Add more stocks</Form.Label>
+            <Form.Control
+              type="number"
+              name="restockAmount"
+              placeholder="enter restock amount"
+            />
+          </Form.Group>
+
+          <Button
+            className="w-100 text-dark fw-bold"
+            variant="danger"
+            type="submit"
+          >
+            Restock
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 };
