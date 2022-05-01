@@ -12,7 +12,7 @@ const Item = ({ item }) => {
     navigate(`/inventory/${id}`);
   };
   return (
-    <div className="col col-12 col-lg-3 col-md-4">
+    <div className="col col-12 col-lg-4 col-md-6 mx-auto">
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src={img} />
         <Card.Body>

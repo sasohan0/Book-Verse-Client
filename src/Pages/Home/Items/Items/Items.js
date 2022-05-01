@@ -4,13 +4,15 @@ import Item from "../Item/Item";
 const Items = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
-    fetch("https://blooming-wave-56097.herokuapp.com/inventory")
+    fetch("http://localhost:5000/inventory")
       .then((res) => res.json())
       .then((data) => setItems(data));
   }, []);
   return (
     <div className="container mt-5">
-      <h1 className="mb-5">Items</h1>
+      <h1 className=" d-flex justify-content-center mb-5 text-success">
+        Demo Books
+      </h1>
       <div className=" row g-5">
         {items.map((item) => (
           <Item key={item._id} item={item}></Item>

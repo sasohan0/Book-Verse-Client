@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import Card from "react-bootstrap/esm/Card";
 import { useParams } from "react-router-dom";
+import ManageItemsLink from "../../../Shared/ManageItemsLink/ManageItemsLink";
 
 const ItemDetails = () => {
   const { itemId } = useParams();
@@ -9,7 +10,7 @@ const ItemDetails = () => {
   let { img, _id, name, price, quantity, shortDescription, supplierName } =
     itemDetail;
   useEffect(() => {
-    const url = `https://blooming-wave-56097.herokuapp.com/inventory/${itemId}`;
+    const url = `https://fast-meadow-45185.herokuapp.com/inventory/${itemId}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setItemDetail(data));
@@ -24,7 +25,7 @@ const ItemDetails = () => {
 
       setItemDetail(newItemDetail);
       const updatedQuantity = { quantity };
-      fetch(`https://blooming-wave-56097.herokuapp.com/inventory/${itemId}`, {
+      fetch(`https://fast-meadow-45185.herokuapp.com/inventory/${itemId}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -48,7 +49,7 @@ const ItemDetails = () => {
       const newItemDetail = { quantity, ...rest };
       console.log(newItemDetail);
       setItemDetail(newItemDetail);
-      fetch(`https://blooming-wave-56097.herokuapp.com/inventory/${itemId}`, {
+      fetch(`https://fast-meadow-45185.herokuapp.com/inventory/${itemId}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -64,7 +65,9 @@ const ItemDetails = () => {
 
   return (
     <div className="container">
-      <h1>details</h1>
+      <h1 className="d-flex justify-content-center mt-3 mb-3 text-success">
+        Item : {name}
+      </h1>
       <Card className="mx-auto" style={{ width: "50%" }}>
         <Card.Img style={{ height: "650px" }} variant="top" src={img} />
         <Card.Body>
@@ -101,7 +104,8 @@ const ItemDetails = () => {
           </button>
         </Card.Body>
       </Card>
-      <div className="mx-auto container" style={{ width: "50%" }}>
+      <ManageItemsLink></ManageItemsLink>
+      <div className="mx-auto container mb-5" style={{ width: "50%" }}>
         <span className="d-flex mt-5 justify-content-center display-5 fw-bold ">
           ADD MORE
         </span>

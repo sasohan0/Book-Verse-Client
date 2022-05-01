@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import InventoryItem from "../InventoryItem/InventoryItem";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../../firebase.init";
+import InventoryItem from "../../../Inventory/InventoryItem/InventoryItem";
 
-const ManageInventory = () => {
-  const [items, setItems] = useState([]);
+const UserItems = () => {
+  const [user] = useAuthState(auth);
+  const [userItems, setUserItems] = useState([]);
+
+  const email = user?.email;
+
   useEffect(() => {
-    fetch("https://fast-meadow-45185.herokuapp.com/inventory")
+    fetch(`https://fast-meadow-45185.herokuapp.com/userItems/${email}`)
       .then((res) => res.json())
-      .then((data) => setItems(data));
-  }, [items]);
+      .then((data) => setUserItems(data));
+  }, [email, userItems]);
+
   return (
     <div className="container">
+      <h1 className="d-flex justify-content-center mt-5 mb-3">
+        Items of : <span className="text-success">{user?.email}</span>
+      </h1>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -24,7 +34,7 @@ const ManageInventory = () => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => (
+          {userItems.map((item) => (
             <InventoryItem key={item._id} item={item}></InventoryItem>
           ))}
         </tbody>
@@ -33,4 +43,4 @@ const ManageInventory = () => {
   );
 };
 
-export default ManageInventory;
+export default UserItems;

@@ -25,7 +25,7 @@ const AddItem = () => {
       supplierName: supplierName,
       shortDescription: shortDescription,
     };
-    fetch("http://localhost:5000/inventory", {
+    fetch("https://fast-meadow-45185.herokuapp.com/inventory", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -39,7 +39,7 @@ const AddItem = () => {
       });
     const [userField, ...rest] = Array.from(document.querySelectorAll("input"));
     rest.forEach((input) => (input.value = ""));
-    this.setState({
+    this?.setState({
       itemvalues: [{}],
     });
   };
@@ -72,8 +72,10 @@ const AddItem = () => {
           <Form.Control
             type="text"
             name="shortDescription"
+            maxLength={200}
             placeholder="Enter short description"
           />
+          <Form.Text>max 200 characters</Form.Text>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Price</Form.Label>

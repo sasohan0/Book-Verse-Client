@@ -1,11 +1,11 @@
 import React from "react";
-
+import deletePng from "../../../delete.png";
 const InventoryItem = ({ item }) => {
   const { _id, img, name, supplierName, price, quantity } = item;
   const handleItemDelete = (id) => {
     const confirmed = window.confirm("Sure to delete?");
     if (confirmed) {
-      fetch(`https://blooming-wave-56097.herokuapp.com/inventory/${id}`, {
+      fetch(`https://fast-meadow-45185.herokuapp.com/inventory/${id}`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
@@ -31,7 +31,7 @@ const InventoryItem = ({ item }) => {
         <button onClick={() => handleItemDelete(_id)} className="btn btn-dark">
           <img
             style={{ width: "32px", height: "32px" }}
-            src="delete.png"
+            src={deletePng}
             alt=""
           />
         </button>
