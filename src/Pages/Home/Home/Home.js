@@ -3,12 +3,13 @@ import ManageItemsLink from "../../Shared/ManageItemsLink/ManageItemsLink";
 import Banner from "../Banner/Banner";
 import Items from "../Items/Items/Items";
 
-const Home = () => {
+const Home = (props) => {
+  const parent = "home";
   return (
     <div>
       <Banner></Banner>
       <div className="container">
-        <Items></Items>
+        <Items>{parent} </Items>
         <ManageItemsLink></ManageItemsLink>
       </div>
     </div>

@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom";
 const Item = ({ item }) => {
   const { _id, img, name, shortDescription, price, quantity, supplierName } =
     item;
+
   const navigate = useNavigate();
   const handleNavigate = (id) => {
     navigate(`/inventory/${id}`);
   };
+
   return (
     <div className="col col-12 col-lg-4 col-md-6 mx-auto">
       <Card style={{ width: "18rem" }}>
