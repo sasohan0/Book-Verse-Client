@@ -33,16 +33,19 @@ const Register = () => {
   ) {
     return (
       <div className="text-center mt-5">
-        <h3 className="text-danger">Your Email is not verified!!</h3>
-        <h5 className="text-success"> Please Verify your email address</h5>
+        <h3 className="text-danger">Did you verify through mail?</h3>
+        <h5 className="text-primary">
+          {" "}
+          If not please try again. <small>(check spam mails also)</small>
+        </h5>
         <button
-          className="btn btn-primary"
+          className="btn btn-danger"
           onClick={async () => {
             await sendEmailVerification();
             alert("Sent email");
           }}
         >
-          Send Verification Email Again
+          Resend Verification Mail
         </button>
       </div>
     );

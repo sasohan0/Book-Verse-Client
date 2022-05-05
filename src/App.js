@@ -11,6 +11,7 @@ import AddItem from "./Pages/Home/Items/AddItem/AddItem";
 import UserItems from "./Pages/Home/Items/UserItems/UserItems";
 import Footer from "./Pages/Footer/Footer";
 import Blogs from "./Pages/Blogs/Blogs";
+import About from "./Pages/About/About";
 
 function App() {
   return (
@@ -55,7 +56,7 @@ function App() {
           }
         ></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
-        <Route path="*" element={<Home></Home>}></Route>
+        <Route path="/about" element={<About></About>}></Route>
         <Route path="*" element={<Home></Home>}></Route>
       </Routes>
       <Footer></Footer>
