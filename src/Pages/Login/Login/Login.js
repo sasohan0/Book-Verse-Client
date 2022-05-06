@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Routes,
   Route,
@@ -11,12 +11,14 @@ import {
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/esm/Button";
 import {
+  useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
 import Error from "../../Shared/Error/Error";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -24,6 +26,9 @@ const Login = () => {
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
 
+  const [sendPasswordResetEmail, sending, errorReset] =
+    useSendPasswordResetEmail(auth);
+  const [email, setEmail] = useState("");
   let navigate = useNavigate();
   let location = useLocation();
 
@@ -35,7 +40,16 @@ const Login = () => {
     const password = e.target.password.value;
     await signInWithEmailAndPassword(email, password);
   };
-
+  const handleReset = async (e) => {
+    e.preventDefault();
+    if (email) {
+      console.log(email);
+      await sendPasswordResetEmail(email);
+      toast("Sent email");
+    } else {
+      alert("enter mail first");
+    }
+  };
   if (loading || loadingGoogle) {
     return <Loading></Loading>;
   }
@@ -47,7 +61,12 @@ const Login = () => {
     <div className="container   mt-5">
       <Form onSubmit={(e) => handleSubmit(e)} className="w-50 mx-auto">
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Control type="email" name="email" placeholder="Enter email" />
+          <Form.Control
+            type="email"
+            name="email"
+            placeholder="Enter email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -66,6 +85,14 @@ const Login = () => {
           </div>
           <span>
             Don't have an account? <Link to="/register"> register here</Link>
+          </span>
+          <br />
+          <span>
+            Forgot password?{" "}
+            <button onClick={(e) => handleReset(e)} className="btn btn-link">
+              {" "}
+              reset password
+            </button>
           </span>
         </Form.Group>
         <div style={{ textAlign: "center" }}>

@@ -3,6 +3,7 @@ import ManageItemsLink from "../../Shared/ManageItemsLink/ManageItemsLink";
 import Banner from "../Banner/Banner";
 import Items from "../Items/Items/Items";
 import Map from "../Map/Map";
+import RecentActivity from "../RecentActivity/RecentActivity";
 
 const Home = (props) => {
   const parent = "home";
@@ -13,6 +14,7 @@ const Home = (props) => {
         <Items>{parent} </Items>
         <ManageItemsLink></ManageItemsLink>
         <Map></Map>
+        <RecentActivity></RecentActivity>
       </div>
     </div>
   );

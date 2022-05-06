@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import InventoryItem from "../InventoryItem/InventoryItem";
-
+import { Link } from "react-router-dom";
 const ManageInventory = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
@@ -11,6 +11,9 @@ const ManageInventory = () => {
   }, [items]);
   return (
     <div className="container">
+      <Link className="btn btn-success my-5 p-3" as={Link} to="/addItem">
+        +Add New Item
+      </Link>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

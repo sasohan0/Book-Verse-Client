@@ -13,11 +13,25 @@ import Footer from "./Pages/Footer/Footer";
 import Blogs from "./Pages/Blogs/Blogs";
 import About from "./Pages/About/About";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <div>
       <Header></Header>
 
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/" element={<Home></Home>}></Route>

@@ -9,6 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import auth from "../../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -24,7 +25,7 @@ const Register = () => {
     const password = e.target.password.value;
     await createUserWithEmailAndPassword(email, password);
     await sendEmailVerification();
-    alert("Sent email");
+    toast("Sent email");
   };
 
   if (
