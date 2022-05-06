@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../firebase.init";
+import { toast } from "react-toastify";
 
 const AddItem = () => {
   const [user, loading] = useAuthState(auth);
@@ -35,7 +36,7 @@ const AddItem = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        alert("successfully added");
+        toast("successfully added");
       });
     const [userField, ...rest] = Array.from(document.querySelectorAll("input"));
     rest.forEach((input) => (input.value = ""));

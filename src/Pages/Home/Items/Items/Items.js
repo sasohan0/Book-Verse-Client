@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useItems from "../../../../hooks/useItems/useItems";
 import Item from "../Item/Item";
 
 const Items = () => {
-  const [items, setItems] = useState([]);
+  const [items] = useItems();
+
   const path = window.location.pathname;
   console.log(path);
-  useEffect(() => {
-    fetch("https://fast-meadow-45185.herokuapp.com/inventory")
-      .then((res) => res.json())
-      .then((data) => setItems(data));
-  }, []);
 
   if (path === "/" || "/home") {
     const homeItems = items.slice(0, 6);

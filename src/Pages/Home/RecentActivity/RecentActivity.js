@@ -5,7 +5,7 @@ const RecentActivity = () => {
   return (
     <div>
       <h1 className="text-center mt-5">RECENT ACTIVITIES</h1>
-      <div className="d-flex justify-content-around mt-5">
+      <div className="d-flex justify-content-around flex-wrap mt-5">
         <Card
           className="col col-12 col-lg-4 border-success"
           style={{ width: "18rem" }}

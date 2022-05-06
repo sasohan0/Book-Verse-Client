@@ -2,25 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import InventoryItem from "../InventoryItem/InventoryItem";
 import { Link } from "react-router-dom";
+import useItems from "../../../hooks/useItems/useItems";
 const ManageInventory = () => {
-  const [items, setItems] = useState([]);
-  useEffect(() => {
-    fetch("https://fast-meadow-45185.herokuapp.com/inventory")
-      .then((res) => res.json())
-      .then((data) => setItems(data));
-  }, [items]);
+  const [items] = useItems();
+
   return (
     <div className="container">
       <Link className="btn btn-success my-5 p-3" as={Link} to="/addItem">
         +Add New Item
       </Link>
-      <Table striped bordered hover variant="dark">
+      <Table className="w-100" striped bordered hover variant="dark">
         <thead>
           <tr>
-            <th>#</th>
+            <th className="responsive">#</th>
             <th style={{ width: "150px" }}>Thumbnail</th>
-            <th>Book Name</th>
-            <th>Author</th>
+            <th className="responsive">Book Name</th>
+            <th className="responsive">Author</th>
             <th>Price</th>
             <th>Quantity</th>
             <th></th>

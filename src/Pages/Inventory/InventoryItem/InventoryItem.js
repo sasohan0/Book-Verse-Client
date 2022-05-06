@@ -19,12 +19,12 @@ const InventoryItem = ({ item }) => {
   };
   return (
     <tr className="">
-      <td></td>
+      <td className="responsive"></td>
       <td>
         <img style={{ width: "150px", height: "200px" }} src={img} alt="" />
       </td>
-      <td>{name}</td>
-      <td>{supplierName}</td>
+      <td className="responsive">{name}</td>
+      <td className="responsive">{supplierName}</td>
       <td>{price}</td>
       <td>{quantity}</td>
       <td>

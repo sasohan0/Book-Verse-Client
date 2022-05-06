@@ -15,6 +15,7 @@ import About from "./Pages/About/About";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/home" element={<Home></Home>}></Route>
         <Route
           path="/inventory/:itemId"
           element={
@@ -71,7 +72,7 @@ function App() {
         ></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/about" element={<About></About>}></Route>
-        <Route path="*" element={<Home></Home>}></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
     </div>

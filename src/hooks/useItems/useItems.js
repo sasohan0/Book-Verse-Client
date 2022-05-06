@@ -6,7 +6,7 @@ const useItems = () => {
     fetch("https://fast-meadow-45185.herokuapp.com/inventory")
       .then((res) => res.json())
       .then((data) => setItems(data));
-  }, []);
+  }, [items]);
   return [items, setItems];
 };
 
