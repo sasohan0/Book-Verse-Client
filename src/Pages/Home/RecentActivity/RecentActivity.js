@@ -25,9 +25,9 @@ const RecentActivity = () => {
           <Card.Body>
             <Card.Title>Pre-ordered books</Card.Title>
             <Card.Text>6000+ books pre-ordered</Card.Text>
-            <button as={Link} to="/inventory" className="btn btn-danger">
+            <Link as={Link} to="/inventory" className="btn btn-danger">
               Manage books
-            </button>
+            </Link>
           </Card.Body>
         </Card>
         <Card
@@ -37,9 +37,9 @@ const RecentActivity = () => {
           <Card.Body>
             <Card.Title>Delivered books</Card.Title>
             <Card.Text>5000+ books delivered</Card.Text>
-            <button as={Link} to="/userItems" className="btn btn-warning">
+            <Link as={Link} to="/userItems" className="btn btn-warning">
               My Items
-            </button>
+            </Link>
           </Card.Body>
         </Card>
       </div>
