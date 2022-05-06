@@ -2,13 +2,15 @@
 
 live site [Bookverse](https://book-verse-8b615.web.app/).
 
-project description :
-_ used react to create client side
-_ used express and mongoDB to create server side
-_ used heroku to host server
-_ used firebase to host website
-_ used react-router and firebase auth
-_ used js operations
+project description : \
+
+- used react to create client side
+
+* used express and mongoDB to create server side
+* used heroku to host server
+* used firebase to host website
+* used react-router and firebase auth
+* used js operations
 
 ## Available Scripts
 
