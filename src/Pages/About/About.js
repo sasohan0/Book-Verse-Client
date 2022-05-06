@@ -4,7 +4,7 @@ import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 const About = () => {
   return (
     <div className="container mt-5">
-      <Card className="mx-auto w-75">
+      <Card className="mx-auto w-75 border-danger">
         <Card.Img className="w-100" variant="top" src="about.jpg" />
         <Card.Body>
           <Card.Title>

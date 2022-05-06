@@ -19,8 +19,8 @@ const UserItems = () => {
   return (
     <div className="container">
       <h1 className="d-flex justify-content-center mt-5 mb-3">
-        <span className="text-danger">({userItems.length || 0})</span> Items of
-        : <span className="text-success">{user?.email}</span>
+        <p className="text-danger">({userItems.length || 0})</p> Items of :{" "}
+        <p className="text-success">{user?.email}</p>
       </h1>
       <Table striped bordered hover variant="dark">
         <thead>
